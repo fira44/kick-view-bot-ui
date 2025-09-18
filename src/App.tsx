@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useState } from "react";
+import { TextField, Slider } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import "./App.css";
+import GradientSlider from "./components/gradient-slider";
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState("");
+  const [duration, setDuration] = useState("");
+  const [value, setValue] = useState(0);
 
   return (
-    <>
+    <div className="container">
+      <TextField
+        variant="outlined"
+        placeholder="Channel name"
+        value={name}
+        className="input"
+        onChange={(e) => setName(e.target.value)}
+      />
+
+      <TextField
+        variant="outlined"
+        placeholder="Duration (minutes)"
+        value={duration}
+        className="input"
+        onChange={(e) => setDuration(e.target.value)}
+      />
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <label>Viewer Count</label>
+        <GradientSlider
+        value={value}
+        min={0}
+        max={10000}
+        valueLabelDisplay="on"
+        onChange={(e, newValue) => setValue(newValue)}
+      />
       </div>
-      <h1>Vitet</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
